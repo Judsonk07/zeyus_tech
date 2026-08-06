@@ -43,6 +43,7 @@ const pageVariants = {
 export const Contact: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const {
     register,
@@ -55,18 +56,25 @@ export const Contact: React.FC = () => {
 
   const onSubmit = async (data: ContactFormValues) => {
     setIsSubmitting(true);
+    setErrorMsg(null);
     try {
       await api.submitContact(data);
       setIsSuccess(true);
+      setErrorMsg(null);
       reset();
-      setTimeout(() => setIsSuccess(false), 5000);
+      setTimeout(() => setIsSuccess(false), 6000);
     } catch (error: any) {
       console.error('Failed to submit', error);
-      const serverMsg = error.response?.data?.errors?.[0]?.msg || error.response?.data?.message;
+      const serverMsg =
+        error.response?.data?.errors?.[0]?.msg ||
+        error.response?.data?.message ||
+        null;
       if (serverMsg) {
-        alert(`Error: ${serverMsg}`);
+        setErrorMsg(serverMsg);
+      } else if (error.code === 'ECONNABORTED' || error.message?.includes('timeout')) {
+        setErrorMsg('Request timed out. The server may be waking up. Please try again in 10 seconds.');
       } else {
-        alert('Server is waking up (Render free tier). Please wait 10 seconds and click Send Message again!');
+        setErrorMsg('Unable to connect to server. Please try again in a moment.');
       }
     } finally {
       setIsSubmitting(false);
@@ -302,6 +310,18 @@ export const Contact: React.FC = () => {
                   />
                   {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message.message}</p>}
                 </div>
+
+                {/* Error Banner */}
+                {errorMsg && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex items-start gap-3 bg-red-50 border border-red-200 rounded-xl px-4 py-3 text-sm text-red-700"
+                  >
+                    <span className="text-red-500 font-bold text-base leading-none mt-0.5">⚠</span>
+                    <span>{errorMsg}</span>
+                  </motion.div>
+                )}
 
                 <Button type="submit" size="lg" className="w-full group" disabled={isSubmitting}>
                   {isSubmitting ? (

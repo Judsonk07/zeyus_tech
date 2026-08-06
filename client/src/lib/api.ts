@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL || 'https://zeyus-tech.onrender.com/api',
+  timeout: 30000, // 30 seconds — allows Render free tier to wake up
   headers: {
     'Content-Type': 'application/json',
   },
