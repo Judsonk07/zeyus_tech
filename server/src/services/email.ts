@@ -79,10 +79,10 @@ export const sendContactNotification = async (data: any) => {
     await transporter.sendMail({
       from: `"Zeyus Website" <${process.env.SMTP_USER}>`,
       to: notificationEmail,
-      subject: `🚀 New Contact Form Lead: ${data.name} (${data.serviceInterest})`,
+      subject: `🚀 New Contact Lead: ${data.name} (${data.serviceInterest})`,
       html: notificationHtml,
     });
-    console.log(`✅ SMTP: Contact notification sent to ${notificationEmail}`);
+    console.log(`✅ SMTP: Notification sent to ${notificationEmail}`);
 
     // 2. Send Auto-Confirmation Email to Client
     const clientAutoReplyHtml = `
@@ -96,7 +96,7 @@ export const sendContactNotification = async (data: any) => {
           <p>Thank you for reaching out to <strong>Zeyus Technologies</strong>!</p>
           <p>We have successfully received your inquiry regarding <strong>${data.serviceInterest}</strong>. Our team is currently reviewing your project details and will get back to you within 24 hours.</p>
           <div style="background-color: #eff6ff; padding: 16px; border-radius: 8px; margin: 20px 0; border: 1px solid #bfdbfe;">
-            <p style="margin: 0; font-size: 14px; color: #1e40af;"><strong>Need urgent assistance?</strong><br/>Feel free to call us directly at <a href="tel:+917708796429" style="color: #2563eb; text-decoration: underline;">+91 7708796429</a> or reply directly to this email.</p>
+            <p style="margin: 0; font-size: 14px; color: #1e40af;"><strong>Need urgent assistance?</strong><br/>Feel free to call us directly at <a href="tel:+917708796429" style="color: #2563eb;">+91 7708796429</a> or reply directly to this email.</p>
           </div>
           <p style="margin-bottom: 0;">Warm regards,<br/><strong>Judson K</strong><br/><span style="color: #64748b; font-size: 13px;">Founder & CEO, Zeyus Technologies</span></p>
         </div>
@@ -109,9 +109,13 @@ export const sendContactNotification = async (data: any) => {
       subject: `Thank you for contacting Zeyus Technologies, ${data.name}!`,
       html: clientAutoReplyHtml,
     });
-    console.log(`✅ SMTP: Auto-reply confirmation sent to client ${data.email}`);
-  } catch (error) {
-    console.error('⚠️ Error sending SMTP email:', error);
+    console.log(`✅ SMTP: Auto-reply sent to ${data.email}`);
+  } catch (error: any) {
+    console.error('⚠️ SMTP Error Code:', error.code);
+    console.error('⚠️ SMTP Error Message:', error.message);
+    console.error('⚠️ SMTP Response:', error.response || 'no response');
+    console.error('⚠️ SMTP_USER env:', process.env.SMTP_USER ? 'SET' : 'MISSING');
+    console.error('⚠️ SMTP_PASS env:', process.env.SMTP_PASS ? 'SET' : 'MISSING');
   }
 };
 
