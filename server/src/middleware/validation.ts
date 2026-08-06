@@ -13,8 +13,9 @@ export const handleValidationErrors = (req: Request, res: Response, next: NextFu
 export const validateContact = [
   body('name').trim().notEmpty().withMessage('Name is required'),
   body('email').isEmail().withMessage('Valid email is required'),
-  body('phone').optional().isString(),
-  body('serviceInterest').isIn(['web-development', 'mobile-app', 'cloud-infrastructure', 'ai-ml', 'it-consulting']).withMessage('Invalid service interest'),
+  body('phone').optional(),
+  body('service').optional(),
+  body('serviceInterest').optional(),
   body('message').trim().notEmpty().withMessage('Message is required'),
   handleValidationErrors
 ];

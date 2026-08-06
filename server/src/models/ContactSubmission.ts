@@ -13,11 +13,7 @@ const ContactSubmissionSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
   phone: { type: String, required: false },
-  serviceInterest: { 
-    type: String, 
-    required: true, 
-    enum: ['web-development', 'mobile-app', 'cloud-infrastructure', 'ai-ml', 'it-consulting'] 
-  },
+  serviceInterest: { type: String, required: true, default: 'General Inquiry' },
   message: { type: String, required: true },
   createdAt: { type: Date, default: Date.now }
 });
