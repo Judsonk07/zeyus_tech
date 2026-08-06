@@ -63,7 +63,7 @@ export const sendContactNotification = async (data: any) => {
         </div>
       </div>
       <div style="background-color: #f8fafc; padding: 12px; text-align: center; color: #94a3b8; font-size: 12px; border-top: 1px solid #e2e8f0;">
-        © 2026 Zeyus Technologies. Sent from your official website contact endpoint.
+        © ${new Date().getFullYear()} Zeyus Technologies. Sent from your official website contact endpoint.
       </div>
     </div>
   `;

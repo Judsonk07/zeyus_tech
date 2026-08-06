@@ -137,7 +137,7 @@ export const Footer: React.FC = () => {
 
         {/* Copyright */}
         <div className="pt-8 border-t border-gray-200 flex flex-col md:flex-row items-center justify-between text-sm text-gray-500">
-          <p>© 2026 Zeyus Technologies. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Zeyus Technologies. All rights reserved.</p>
           <div className="flex space-x-4 mt-4 md:mt-0">
             <Link to="/privacy" className="hover:text-blue-600 transition-colors">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-blue-600 transition-colors">Terms of Service</Link>
