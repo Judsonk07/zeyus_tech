@@ -60,9 +60,14 @@ export const Contact: React.FC = () => {
       setIsSuccess(true);
       reset();
       setTimeout(() => setIsSuccess(false), 5000);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to submit', error);
-      alert('Failed to send message. Please try again later.');
+      const serverMsg = error.response?.data?.errors?.[0]?.msg || error.response?.data?.message;
+      if (serverMsg) {
+        alert(`Error: ${serverMsg}`);
+      } else {
+        alert('Server is waking up (Render free tier). Please wait 10 seconds and click Send Message again!');
+      }
     } finally {
       setIsSubmitting(false);
     }

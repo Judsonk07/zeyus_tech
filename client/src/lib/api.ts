@@ -22,7 +22,11 @@ export interface CourseInquiryData {
 }
 
 export const submitContact = async (data: ContactFormData) => {
-  const response = await apiClient.post('/contact', data);
+  const payload = {
+    ...data,
+    serviceInterest: data.service || 'General Inquiry'
+  };
+  const response = await apiClient.post('/contact', payload);
   return response.data;
 };
 
