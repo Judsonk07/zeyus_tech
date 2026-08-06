@@ -1,0 +1,29 @@
+{
+  "name": "zeyus-technologies-server",
+  "version": "1.0.0",
+  "description": "Zeyus Technologies — Express.js REST API",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.6.1",
+    "express-validator": "^7.3.2",
+    "helmet": "^8.3.0",
+    "mongoose": "^9.9.1",
+    "nodemailer": "^9.0.3"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.3",
+    "@types/node": "^22.15.0",
+    "@types/nodemailer": "^6.4.17",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3"
+  }
+}

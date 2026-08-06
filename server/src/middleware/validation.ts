@@ -1,0 +1,34 @@
+import { body, validationResult } from 'express-validator';
+import { Request, Response, NextFunction } from 'express';
+
+export const handleValidationErrors = (req: Request, res: Response, next: NextFunction): void => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.status(400).json({ errors: errors.array() });
+    return;
+  }
+  next();
+};
+
+export const validateContact = [
+  body('name').trim().notEmpty().withMessage('Name is required'),
+  body('email').isEmail().withMessage('Valid email is required'),
+  body('phone').optional().isString(),
+  body('serviceInterest').isIn(['web-development', 'mobile-app', 'cloud-infrastructure', 'ai-ml', 'it-consulting']).withMessage('Invalid service interest'),
+  body('message').trim().notEmpty().withMessage('Message is required'),
+  handleValidationErrors
+];
+
+export const validateCourseInquiry = [
+  body('name').trim().notEmpty().withMessage('Name is required'),
+  body('email').isEmail().withMessage('Valid email is required'),
+  body('courseInterest').trim().notEmpty().withMessage('Course interest is required'),
+  body('experienceLevel').isIn(['beginner', 'intermediate', 'advanced']).withMessage('Invalid experience level'),
+  body('message').optional().isString(),
+  handleValidationErrors
+];
+
+export const validateNewsletter = [
+  body('email').isEmail().withMessage('Valid email is required'),
+  handleValidationErrors
+];
