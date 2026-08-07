@@ -57,7 +57,7 @@ export const Navbar: React.FC = () => {
                 <img src="/favicon.jpg" alt="Zeyus Technologies Logo" className="w-full h-full object-cover" />
               </div>
               <span className="font-heading font-bold text-lg sm:text-2xl tracking-tight text-navy">
-                ZEYUS <span className="bg-gradient-to-r from-sky to-blue bg-clip-text text-transparent hidden sm:inline">TECHNOLOGIES</span><span className="bg-gradient-to-r from-sky to-blue bg-clip-text text-transparent sm:hidden">TECH</span>
+                ZEYUS <span className="bg-gradient-to-r from-sky to-blue bg-clip-text text-transparent hidden sm:inline">TECH</span><span className="bg-gradient-to-r from-sky to-blue bg-clip-text text-transparent sm:hidden">TECH</span>
               </span>
             </NavLink>
 
