@@ -53,8 +53,8 @@ export const Navbar: React.FC = () => {
           <div className="flex items-center justify-between">
             {/* Sleek Brand Logo */}
             <NavLink to="/" className="flex items-center gap-2 sm:gap-3 z-50 group">
-              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-sky to-blue flex items-center justify-center text-white font-heading font-extrabold text-base sm:text-lg shadow-md group-hover:scale-105 transition-transform duration-300">
-                Z
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl overflow-hidden shadow-md group-hover:scale-105 transition-transform duration-300 border border-slate-200 bg-white">
+                <img src="/favicon.jpg" alt="Zeyus Technologies Logo" className="w-full h-full object-cover" />
               </div>
               <span className="font-heading font-bold text-lg sm:text-2xl tracking-tight text-navy">
                 ZEYUS <span className="bg-gradient-to-r from-sky to-blue bg-clip-text text-transparent hidden sm:inline">TECHNOLOGIES</span><span className="bg-gradient-to-r from-sky to-blue bg-clip-text text-transparent sm:hidden">TECH</span>
