@@ -1,29 +1,28 @@
 import nodemailer from 'nodemailer';
 
 const createTransporter = () => {
-  if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
+  const smtpUser = process.env.SMTP_USER;
+  const smtpPass = process.env.SMTP_PASS;
+
+  if (!smtpUser || !smtpPass) {
+    console.warn('[EMAIL] SMTP_USER or SMTP_PASS not set. Emails will not be sent.');
     return null;
   }
 
-  // Auto-detect Gmail or custom SMTP
-  if (process.env.SMTP_SERVICE === 'gmail' || process.env.SMTP_USER.endsWith('@gmail.com')) {
-    return nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
-  }
+  console.log(`[EMAIL] Creating transporter for: ${smtpUser}`);
 
+  // Use explicit SSL (port 465) — works reliably from cloud servers (Render, etc.)
   return nodemailer.createTransport({
-    host: process.env.SMTP_HOST || 'smtp.gmail.com',
-    port: parseInt(process.env.SMTP_PORT || '587', 10),
-    secure: process.env.SMTP_SECURE === 'true',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // SSL — required for cloud server IPs
     auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
+      user: smtpUser,
+      pass: smtpPass,
     },
+    tls: {
+      rejectUnauthorized: false // Allow self-signed certs in cloud environments
+    }
   });
 };
 
