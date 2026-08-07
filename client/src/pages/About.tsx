@@ -430,129 +430,121 @@ export const About: React.FC = () => {
           </div>
         </motion.section>
 
-        {/* Team Section */}
-        <section className="py-24">
-          <SectionHeading subtitle="Passionate engineers, creators, and strategists behind Zeyus Technologies.">
-            Meet Our Leadership & Team
+        {/* What Drives Us — Culture & Capabilities Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="py-24"
+        >
+          <SectionHeading subtitle="Not just a company — a collective of builders, thinkers, and creators obsessed with excellence.">
+            What Drives Us
           </SectionHeading>
 
-          <motion.div 
+          {/* Culture Cards Grid */}
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
-            }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+            variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.12 } } }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16"
           >
-            {/* Judson K - Founder & CEO */}
-            <motion.div 
-              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
-              whileHover={{ y: -6 }}
-            >
-              <GlassCard className="p-6 text-center border-blue/30 shadow-lg h-full hover:border-blue/60 transition-all duration-300">
-                <div className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden border-2 border-blue/40 shadow-md">
-                  <img 
-                    src="/assets/ceo_portrait.jpg" 
-                    alt="Judson K — Founder & CEO" 
-                    className="w-full h-full object-cover"
-                  />
+            {([
+              { icon: '🔥', title: 'Obsessed with Quality', desc: 'Every pixel, every line of code, every campaign is crafted to the highest standard. Mediocrity has no seat at our table.', gradient: 'from-orange-50 to-red-50', border: 'border-orange-200', accent: 'text-orange-600' },
+              { icon: '🚀', title: 'Execution Over Talk', desc: 'We move fast, ship smart, and iterate constantly. Ideas are worthless without delivery — we deliver.', gradient: 'from-blue-50 to-sky-50', border: 'border-blue-200', accent: 'text-blue-600' },
+              { icon: '🧠', title: 'Always Learning', desc: 'Our team actively trains in AI, Cloud, and DevOps. What we learn, we embed into client projects — staying years ahead.', gradient: 'from-purple-50 to-indigo-50', border: 'border-purple-200', accent: 'text-purple-600' },
+              { icon: '🤝', title: 'Client-First Mindset', desc: "Your success is our success. We treat every client's project like it's our own product, with full ownership and accountability.", gradient: 'from-green-50 to-emerald-50', border: 'border-green-200', accent: 'text-green-600' },
+              { icon: '⚡', title: 'Speed Without Compromise', desc: "We've built infrastructure to move quickly — without sacrificing security, scalability, or design precision.", gradient: 'from-yellow-50 to-amber-50', border: 'border-yellow-200', accent: 'text-yellow-600' },
+              { icon: '🌱', title: 'Community & Growth', desc: 'From Perundurai to global clients — we believe in growing together. We uplift local talent and build global solutions.', gradient: 'from-teal-50 to-cyan-50', border: 'border-teal-200', accent: 'text-teal-600' }
+            ] as { icon: string; title: string; desc: string; gradient: string; border: string; accent: string }[]).map((card, i) => (
+              <motion.div
+                key={i}
+                variants={{ hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0 } }}
+                whileHover={{ y: -5, scale: 1.02 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+              >
+                <div className={`h-full rounded-2xl border ${card.border} bg-gradient-to-br ${card.gradient} p-6 shadow-sm hover:shadow-md transition-all duration-300`}>
+                  <div className="text-4xl mb-4">{card.icon}</div>
+                  <h4 className={`text-lg font-heading font-bold mb-2 ${card.accent}`}>{card.title}</h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">{card.desc}</p>
                 </div>
-                <h4 className="text-xl font-heading font-bold">Judson K</h4>
-                <p className="text-sm text-blue font-semibold mb-3">Founder & CEO</p>
-                <p className="text-sm text-slate-600">
-                  Leading strategic vision, full-stack product engineering, and tech education initiatives.
-                </p>
-              </GlassCard>
-            </motion.div>
-
-            {/* Sriram - MERN Developer */}
-            <motion.div 
-              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
-              whileHover={{ y: -6 }}
-            >
-              <GlassCard className="p-6 text-center h-full hover:border-sky/50 transition-all duration-300">
-                <div className="w-24 h-24 bg-gradient-to-tr from-sky/20 to-blue/20 rounded-full mx-auto mb-4 flex items-center justify-center border-2 border-sky/30 shadow-md">
-                  <span className="font-heading font-bold text-blue text-xl">DEV</span>
-                </div>
-                <h4 className="text-xl font-heading font-bold">Sriram</h4>
-                <p className="text-sm text-blue font-semibold mb-3">MERN Developer</p>
-                <p className="text-sm text-slate-600">
-                  Building scalable, high-performance web applications using React, Node.js, Express, and MongoDB.
-                </p>
-              </GlassCard>
-            </motion.div>
-
-            {/* Sanjay - Python Developer */}
-            <motion.div 
-              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
-              whileHover={{ y: -6 }}
-            >
-              <GlassCard className="p-6 text-center h-full hover:border-purple/50 transition-all duration-300">
-                <div className="w-24 h-24 bg-gradient-to-tr from-blue/20 to-purple/20 rounded-full mx-auto mb-4 flex items-center justify-center border-2 border-blue/30 shadow-md">
-                  <span className="font-heading font-bold text-purple text-xl">PY</span>
-                </div>
-                <h4 className="text-xl font-heading font-bold">Sanjay</h4>
-                <p className="text-sm text-purple font-semibold mb-3">Python Developer</p>
-                <p className="text-sm text-slate-600">
-                  Architecting robust backend APIs, data pipelines, and automation systems using Python frameworks.
-                </p>
-              </GlassCard>
-            </motion.div>
-
-            {/* Aravind - Video Editor */}
-            <motion.div 
-              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
-              whileHover={{ y: -6 }}
-            >
-              <GlassCard className="p-6 text-center h-full hover:border-purple/50 transition-all duration-300">
-                <div className="w-24 h-24 bg-gradient-to-tr from-purple/20 to-pink/20 rounded-full mx-auto mb-4 flex items-center justify-center border-2 border-purple/30 shadow-md">
-                  <span className="font-heading font-bold text-purple text-xl">VID</span>
-                </div>
-                <h4 className="text-xl font-heading font-bold">Aravind</h4>
-                <p className="text-sm text-purple font-semibold mb-3">Video Editor</p>
-                <p className="text-sm text-slate-600">
-                  Crafting engaging promo videos, motion graphics, and high-impact social media reels.
-                </p>
-              </GlassCard>
-            </motion.div>
-
-            {/* Naren - Digital Marketing & Ads */}
-            <motion.div 
-              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
-              whileHover={{ y: -6 }}
-            >
-              <GlassCard className="p-6 text-center h-full hover:border-sky/50 transition-all duration-300">
-                <div className="w-24 h-24 bg-gradient-to-tr from-sky/20 to-sky/40 rounded-full mx-auto mb-4 flex items-center justify-center border-2 border-sky/40 shadow-md">
-                  <span className="font-heading font-bold text-sky text-xl">ADS</span>
-                </div>
-                <h4 className="text-xl font-heading font-bold">Naren</h4>
-                <p className="text-sm text-sky font-semibold mb-3">Digital Marketing & Ads</p>
-                <p className="text-sm text-slate-600">
-                  Managing targeted Google & Meta ad campaigns to maximize audience reach and conversion ROI.
-                </p>
-              </GlassCard>
-            </motion.div>
-
-            {/* Dhinagaran - Digital Marketing & Content Writer */}
-            <motion.div 
-              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
-              whileHover={{ y: -6 }}
-            >
-              <GlassCard className="p-6 text-center h-full hover:border-blue/50 transition-all duration-300">
-                <div className="w-24 h-24 bg-gradient-to-tr from-blue/20 to-purple/20 rounded-full mx-auto mb-4 flex items-center justify-center border-2 border-blue/30 shadow-md">
-                  <span className="font-heading font-bold text-blue text-xl">SEO</span>
-                </div>
-                <h4 className="text-xl font-heading font-bold">Dhinagaran</h4>
-                <p className="text-sm text-blue font-semibold mb-3">Digital Marketing & Content Writer</p>
-                <p className="text-sm text-slate-600">
-                  Creating compelling brand copy, SEO-driven content strategies, and growth marketing articles.
-                </p>
-              </GlassCard>
-            </motion.div>
+              </motion.div>
+            ))}
           </motion.div>
-        </section>
+
+          {/* Skill Expertise — Animated Progress Bars */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-16"
+          >
+            <GlassCard className="p-8 md:p-12 border-blue/20 shadow-xl bg-gradient-to-br from-navy/5 via-white to-blue/5" disableTilt>
+              <h3 className="text-2xl font-heading font-bold text-navy mb-2 text-center">Our Collective Expertise</h3>
+              <p className="text-slate-500 text-center text-sm mb-10">The depth of skills powering every Zeyus project</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+                {([
+                  { skill: 'Full-Stack Web Development', level: 95, color: 'from-sky-400 to-blue-600' },
+                  { skill: 'Cloud & DevOps Engineering', level: 90, color: 'from-blue-400 to-indigo-600' },
+                  { skill: 'Digital Marketing & Ads', level: 88, color: 'from-purple-400 to-pink-500' },
+                  { skill: 'AI & Machine Learning', level: 82, color: 'from-emerald-400 to-teal-600' },
+                  { skill: 'Video Editing & Motion', level: 85, color: 'from-orange-400 to-red-500' },
+                  { skill: 'SEO & Content Strategy', level: 91, color: 'from-yellow-400 to-amber-600' }
+                ] as { skill: string; level: number; color: string }[]).map((item, i) => (
+                  <div key={i}>
+                    <div className="flex justify-between mb-1.5">
+                      <span className="text-sm font-semibold text-slate-700">{item.skill}</span>
+                      <span className="text-sm font-bold text-slate-500">{item.level}%</span>
+                    </div>
+                    <div className="h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${item.level}%` }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1.2, delay: i * 0.1, ease: 'easeOut' }}
+                        className={`h-full rounded-full bg-gradient-to-r ${item.color}`}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </GlassCard>
+          </motion.div>
+
+          {/* CTA Strip */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-navy via-blue/90 to-sky/80 p-10 md:p-14 text-center text-white shadow-2xl"
+          >
+            <div className="absolute inset-0 opacity-30 pointer-events-none">
+              <div className="absolute -top-10 -left-10 w-64 h-64 bg-sky/40 rounded-full blur-3xl" />
+              <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-purple/40 rounded-full blur-3xl" />
+            </div>
+            <div className="relative z-10">
+              <p className="text-sky font-semibold text-sm tracking-widest uppercase mb-3">Join the Journey</p>
+              <h3 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+                Built by Passionate Builders,<br className="hidden md:block" /> For Ambitious Visionaries
+              </h3>
+              <p className="text-slate-300 max-w-xl mx-auto mb-8 text-base">
+                Behind every Zeyus project is a team that shows up fully — with deep expertise, creative instinct, and the relentless drive to make your vision real.
+              </p>
+              <a
+                href="/contact"
+                className="inline-flex items-center gap-2 bg-white text-navy font-bold px-8 py-3.5 rounded-2xl hover:bg-sky hover:text-white transition-all duration-300 shadow-lg hover:shadow-sky/40 hover:-translate-y-0.5"
+              >
+                Work With Us
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            </div>
+          </motion.div>
+        </motion.section>
 
       </Container>
     </motion.div>
