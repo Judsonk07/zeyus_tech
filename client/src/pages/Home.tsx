@@ -94,7 +94,8 @@ export const Home: React.FC = () => {
         </Container>
       </section>
 
-      {/* Stats Bar */}
+      {/* Stats Bar — Commented out for early-stage startup rollout */}
+      {/* 
       <section className="py-8 sm:py-12 border-y border-sky/20 bg-surface/50 backdrop-blur-sm">
         <Container>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
@@ -117,6 +118,7 @@ export const Home: React.FC = () => {
           </div>
         </Container>
       </section>
+      */}
 
       {/* Services Preview */}
       <section className="py-16 sm:py-24">
