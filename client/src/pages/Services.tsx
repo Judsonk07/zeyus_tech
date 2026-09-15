@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
@@ -12,13 +12,16 @@ import {
   ArrowRight,
   Zap,
   Clock,
-  ShieldCheck
+  ShieldCheck,
+  MessageCircle,
+  Tag
 } from 'lucide-react';
 
 import { Container } from '@/components/layout/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Button } from '@/components/ui/Button';
 import { GlassCard } from '@/components/ui/GlassCard';
+import { PRICING_DATA, getWhatsAppLink } from '@/lib/constants';
 
 const pageVariants = {
   initial: { opacity: 0, y: 20 },
@@ -26,15 +29,31 @@ const pageVariants = {
   exit: { opacity: 0, y: -20, transition: { duration: 0.3 } }
 };
 
-const ServiceSection = ({ 
+interface ServiceSectionProps {
+  id: string;
+  title: string;
+  description: string;
+  features: string[];
+  startingPrice?: string;
+  whatsappMsg?: string;
+  icon: any;
+  reversed?: boolean;
+  isPurple?: boolean;
+}
+
+const ServiceSection: React.FC<ServiceSectionProps> = ({ 
   id, 
   title, 
   description, 
   features, 
+  startingPrice,
+  whatsappMsg,
   icon: Icon, 
   reversed = false,
   isPurple = false
-}: any) => {
+}) => {
+  const whatsappUrl = getWhatsAppLink(whatsappMsg || `Hello Zeyus Technologies! I am interested in your ${title} services. Please share pricing and project details.`);
+
   return (
     <motion.div 
       id={id}
@@ -75,10 +94,17 @@ const ServiceSection = ({
       
       {/* Content Column */}
       <div className="w-full md:w-1/2">
-        <span className={`px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase mb-3 inline-block
-          ${isPurple ? 'bg-purple/10 text-purple' : 'bg-blue/10 text-blue'}`}>
-          Service Breakdown
-        </span>
+        <div className="flex flex-wrap items-center gap-2 mb-3">
+          <span className={`px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase
+            ${isPurple ? 'bg-purple/10 text-purple' : 'bg-blue/10 text-blue'}`}>
+            Service Breakdown
+          </span>
+          {startingPrice && (
+            <span className="px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-800 border border-green-300 flex items-center gap-1">
+              <Tag className="w-3 h-3" /> Starts at {startingPrice}
+            </span>
+          )}
+        </div>
         <h3 className="text-3xl sm:text-4xl font-heading font-bold text-navy mb-4">{title}</h3>
         <p className="text-base sm:text-lg text-slate-600 mb-6 leading-relaxed">{description}</p>
         
@@ -91,7 +117,7 @@ const ServiceSection = ({
             hidden: { opacity: 0 },
             visible: { opacity: 1, transition: { staggerChildren: 0.08 } }
           }}
-          className="space-y-3"
+          className="space-y-3 mb-8"
         >
           {features.map((feature: string, idx: number) => (
             <motion.li 
@@ -104,12 +130,35 @@ const ServiceSection = ({
             </motion.li>
           ))}
         </motion.ul>
+
+        {/* WhatsApp Direct Action Button */}
+        <div className="flex flex-wrap gap-4 items-center">
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3.5 rounded-xl hover:bg-[#20bd5a] transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 text-sm sm:text-base"
+          >
+            <MessageCircle className="w-5 h-5 fill-current" />
+            Enquire on WhatsApp
+          </a>
+          <a
+            href="#pricing-packages"
+            className="inline-flex items-center gap-1.5 text-blue font-semibold hover:text-navy text-sm sm:text-base transition-colors"
+          >
+            View Pricing Plans ↓
+          </a>
+        </div>
       </div>
     </motion.div>
   );
 };
 
 export const Services: React.FC = () => {
+  const [activeCategory, setActiveCategory] = useState<string>('web-development');
+
+  const currentCategory = PRICING_DATA.find((c) => c.serviceId === activeCategory) || PRICING_DATA[0];
+
   return (
     <motion.div
       variants={pageVariants}
@@ -159,7 +208,7 @@ export const Services: React.FC = () => {
             >
               What We Do Best. <br />
               <span className="bg-gradient-to-r from-sky via-blue to-purple bg-clip-text text-transparent">
-                Services Built to Scale.
+                Transparent Pricing & Instant Support.
               </span>
             </motion.h1>
 
@@ -170,7 +219,7 @@ export const Services: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-base sm:text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-10"
             >
-              We provide a comprehensive suite of digital services to build, scale, and market your products, while empowering the next generation of tech talent.
+              Check our service plans, explore starting prices, and chat directly with our technical team on WhatsApp with a single click.
             </motion.p>
 
             {/* Metric Pills */}
@@ -196,7 +245,6 @@ export const Services: React.FC = () => {
                 </div>
                 <div className="text-left">
                   <p className="font-heading font-bold text-navy text-sm">Enterprise DevOps</p>
-
                   <p className="text-xs text-slate-500">AWS & Docker Infrastructure</p>
                 </div>
               </div>
@@ -206,8 +254,8 @@ export const Services: React.FC = () => {
                   <Clock className="w-5 h-5" />
                 </div>
                 <div className="text-left">
-                  <p className="font-heading font-bold text-navy text-sm">Transparent Models</p>
-                  <p className="text-xs text-slate-500">Project, Retainer & Hourly</p>
+                  <p className="font-heading font-bold text-navy text-sm">Instant WhatsApp Quotes</p>
+                  <p className="text-xs text-slate-500">Pre-filled default messages</p>
                 </div>
               </div>
             </motion.div>
@@ -221,20 +269,24 @@ export const Services: React.FC = () => {
           <ServiceSection 
             id="web"
             title="Web Development"
+            startingPrice="₹9,999"
+            whatsappMsg="Hello Zeyus Technologies! I am interested in your Web Development pricing (Starting at ₹9,999). Can we discuss my website project?"
             description="We build fast, responsive, and secure custom websites, web applications, and SaaS platforms that provide exceptional user experiences."
             icon={Code2}
             features={[
               "Custom React & Next.js Applications",
               "MERN Stack Development",
-              "E-commerce Solutions",
+              "E-commerce & SaaS Solutions",
               "Progressive Web Apps (PWAs)",
-              "API Design & Integration"
+              "API Design & Payment Gateways"
             ]}
           />
           
           <ServiceSection 
             id="cloud"
             title="Cloud & DevOps"
+            startingPrice="₹14,999"
+            whatsappMsg="Hello Zeyus Technologies! I am interested in your Cloud & DevOps pricing (Starting at ₹14,999). Can we discuss cloud architecture for my app?"
             description="Streamline your development lifecycle and scale effortlessly with our robust cloud architecture and DevOps solutions."
             icon={CloudCog}
             reversed={true}
@@ -243,20 +295,22 @@ export const Services: React.FC = () => {
               "Kubernetes & Docker Containerization",
               "CI/CD Pipeline Automation",
               "Infrastructure as Code (Terraform)",
-              "Cloud Migration & Optimization"
+              "Cloud Migration & Cost Optimization"
             ]}
           />
           
           <ServiceSection 
             id="marketing"
             title="Ads & Digital Marketing"
+            startingPrice="₹7,999 / mo"
+            whatsappMsg="Hello Zeyus Technologies! I am interested in your Digital Marketing & Ads packages (Starting at ₹7,999/mo). How can you help grow my leads?"
             description="Drive targeted traffic and increase conversions with data-driven marketing strategies tailored to your target audience."
             icon={LineChart}
             features={[
               "Google Ads & Meta Ads Management",
               "Search Engine Optimization (SEO)",
               "Conversion Rate Optimization",
-              "Web Analytics & Reporting",
+              "Web Analytics & Pixel Tracking",
               "Email Marketing Automation"
             ]}
           />
@@ -264,36 +318,128 @@ export const Services: React.FC = () => {
           <ServiceSection 
             id="video"
             title="Video Editing"
+            startingPrice="₹4,999"
+            whatsappMsg="Hello Zeyus Technologies! I am interested in your Video Editing pricing (Starting at ₹4,999). Can I share my video requirements?"
             description="Captivate your audience with high-quality video content that tells your brand's story across all platforms."
             icon={Film}
             reversed={true}
             features={[
-              "Promotional Videos & Ads",
-              "Social Media Reels (TikTok/IG/Shorts)",
-              "Motion Graphics & Animation",
-              "YouTube Video Production",
-              "Color Grading & Sound Design"
+              "Promotional Videos & Commercial Ads",
+              "Social Media Reels (TikTok / IG / Shorts)",
+              "Motion Graphics & Lower Thirds",
+              "YouTube Video Editing Packages",
+              "Color Grading & Audio Enhancement"
             ]}
           />
           
           <ServiceSection 
             id="education"
             title="AI, Cloud & DevOps Education"
+            startingPrice="₹2,999"
+            whatsappMsg="Hello Zeyus Technologies! I am interested in enrolling in your AI, Cloud & DevOps Education programs (Starting at ₹2,999). Please send details."
             description="Upskill yourself or your team with our industry-aligned training programs, led by practicing experts."
             icon={Lightbulb}
             isPurple={true}
             features={[
-              "Live Cohort-Based Courses",
+              "Live Cohort-Based Classes",
               "AI & Machine Learning Fundamentals",
-              "Cloud Certifications Prep",
-              "Corporate Team Training",
+              "Cloud Certifications Prep (AWS / Azure)",
+              "Corporate Team Training Workshops",
               "1-on-1 Technical Mentorship"
             ]}
           />
         </div>
 
-        {/* Pricing Models */}
-        <div className="py-24">
+        {/* Dedicated Service Pricing Packages Section */}
+        <div id="pricing-packages" className="py-20 border-t border-sky/10">
+          <SectionHeading subtitle="Transparent pricing plans. Click any plan to contact us directly on WhatsApp with a pre-filled inquiry message.">
+            Service Pricing & Packages
+          </SectionHeading>
+
+          {/* Category Tabs Selector */}
+          <div className="flex flex-wrap justify-center gap-2 mb-12">
+            {PRICING_DATA.map((cat) => (
+              <button
+                key={cat.serviceId}
+                onClick={() => setActiveCategory(cat.serviceId)}
+                className={`px-5 py-2.5 rounded-full font-heading font-bold text-xs sm:text-sm transition-all duration-300 ${
+                  activeCategory === cat.serviceId
+                    ? 'bg-gradient-to-r from-sky via-blue to-purple text-white shadow-md scale-105'
+                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                }`}
+              >
+                {cat.serviceName}
+              </button>
+            ))}
+          </div>
+
+          {/* Pricing Cards Grid */}
+          {currentCategory && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {currentCategory.plans.map((plan, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: idx * 0.1 }}
+                >
+                  <GlassCard
+                    className={`p-8 flex flex-col h-full relative transition-all duration-300 ${
+                      plan.popular ? 'border-2 border-blue shadow-2xl scale-105 bg-white z-10' : 'hover:border-sky/40'
+                    }`}
+                  >
+                    {plan.popular && (
+                      <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-blue to-sky text-white px-4 py-1 rounded-full text-xs font-extrabold tracking-wider shadow-md uppercase">
+                        MOST POPULAR
+                      </div>
+                    )}
+
+                    <h4 className="text-2xl font-heading font-bold text-navy mb-2">{plan.name}</h4>
+                    
+                    <div className="my-4 flex items-baseline gap-1">
+                      <span className="text-4xl font-heading font-extrabold text-blue">{plan.price}</span>
+                      {plan.period && <span className="text-sm font-semibold text-slate-500">{plan.period}</span>}
+                    </div>
+
+                    <p className="text-slate-600 text-sm leading-relaxed mb-6">{plan.description}</p>
+                    
+                    <div className="w-full h-px bg-slate-200 mb-6" />
+
+                    <ul className="space-y-3 mb-8 flex-grow">
+                      {plan.features.map((feat, fIdx) => (
+                        <li key={fIdx} className="flex items-start text-sm text-slate-700 font-medium">
+                          <CheckCircle2 className="w-4 h-4 text-green-500 mr-2.5 flex-shrink-0 mt-0.5" />
+                          <span>{feat}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* Direct WhatsApp Action Button */}
+                    <a
+                      href={getWhatsAppLink(plan.whatsappMessage)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full inline-flex items-center justify-center gap-2 bg-[#25D366] text-white font-bold py-3.5 px-6 rounded-xl hover:bg-[#20bd5a] transition-all shadow-md hover:shadow-lg text-sm sm:text-base mb-3 group"
+                    >
+                      <MessageCircle className="w-5 h-5 fill-current" />
+                      Enquire on WhatsApp
+                    </a>
+
+                    <Link
+                      to="/contact"
+                      className="w-full text-center text-xs text-slate-500 hover:text-blue font-semibold transition-colors"
+                    >
+                      Or submit via Email Form →
+                    </Link>
+                  </GlassCard>
+                </motion.div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Engagement Models */}
+        <div className="py-16 border-t border-sky/10">
           <SectionHeading subtitle="Flexible ways to work with us, tailored to your project scope and budget.">
             Engagement Models
           </SectionHeading>
@@ -317,7 +463,15 @@ export const Services: React.FC = () => {
                 <h4 className="text-2xl font-heading font-bold mb-4">Project-Based</h4>
                 <p className="text-slate-600 mb-6 flex-grow leading-relaxed">Fixed scope, timeline, and budget. Ideal for well-defined applications and specific marketing campaigns.</p>
                 <div className="w-full h-1 bg-sky/20 rounded mb-6" />
-                <p className="text-sm font-bold text-sky uppercase tracking-wider">Best for New Builds</p>
+                <p className="text-sm font-bold text-sky uppercase tracking-wider mb-4">Best for New Builds</p>
+                <a
+                  href={getWhatsAppLink("Hello Zeyus Technologies! I want to discuss a Project-Based contract with fixed scope and timeline.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-xs font-bold text-[#128C7E] hover:underline"
+                >
+                  <MessageCircle className="w-4 h-4 fill-current" /> Enquire via WhatsApp
+                </a>
               </GlassCard>
             </motion.div>
 
@@ -330,10 +484,18 @@ export const Services: React.FC = () => {
                 <div className="absolute -top-3.5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-blue to-sky text-white px-4 py-1 rounded-full text-xs font-bold tracking-wider shadow-md uppercase">
                   MOST POPULAR
                 </div>
-                <h4 className="text-2xl font-heading font-bold mb-4 mt-2">Retainer</h4>
+                <h4 className="text-2xl font-heading font-bold mb-4 mt-2">Monthly Retainer</h4>
                 <p className="text-slate-600 mb-6 flex-grow leading-relaxed">Dedicated monthly hours for ongoing development, marketing optimization, and strategic guidance.</p>
                 <div className="w-full h-1 bg-blue/20 rounded mb-6" />
-                <p className="text-sm font-bold text-blue uppercase tracking-wider">Best for Growth</p>
+                <p className="text-sm font-bold text-blue uppercase tracking-wider mb-4">Best for Growth</p>
+                <a
+                  href={getWhatsAppLink("Hello Zeyus Technologies! I want to discuss a Monthly Retainer agreement for dedicated development/marketing.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-xs font-bold text-[#128C7E] hover:underline"
+                >
+                  <MessageCircle className="w-4 h-4 fill-current" /> Enquire via WhatsApp
+                </a>
               </GlassCard>
             </motion.div>
 
@@ -346,7 +508,15 @@ export const Services: React.FC = () => {
                 <h4 className="text-2xl font-heading font-bold mb-4">Hourly Consulting</h4>
                 <p className="text-slate-600 mb-6 flex-grow leading-relaxed">Flexible, on-demand expertise for architectural reviews, troubleshooting, or ad-hoc tasks.</p>
                 <div className="w-full h-1 bg-sky/20 rounded mb-6" />
-                <p className="text-sm font-bold text-sky uppercase tracking-wider">Best for Quick Fixes</p>
+                <p className="text-sm font-bold text-sky uppercase tracking-wider mb-4">Best for Quick Fixes</p>
+                <a
+                  href={getWhatsAppLink("Hello Zeyus Technologies! I am looking for Hourly Consulting or technical advice.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-xs font-bold text-[#128C7E] hover:underline"
+                >
+                  <MessageCircle className="w-4 h-4 fill-current" /> Enquire via WhatsApp
+                </a>
               </GlassCard>
             </motion.div>
           </motion.div>
@@ -362,15 +532,26 @@ export const Services: React.FC = () => {
         >
           <div className="absolute top-0 right-0 w-64 h-64 bg-sky/20 rounded-full mix-blend-multiply filter blur-3xl opacity-50 pointer-events-none" />
           <div className="relative z-10 max-w-2xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4 text-navy">Not sure which service fits?</h2>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4 text-navy">Need a custom quote or package?</h2>
             <p className="text-base sm:text-lg text-slate-600 mb-8 leading-relaxed">
-              Book a free discovery call. We'll listen to your needs and recommend the best approach, no strings attached.
+              We customize packages based on your exact requirements and timeline. Chat directly on WhatsApp for an instant response.
             </p>
-            <Link to="/contact">
-              <Button size="lg" className="px-8 text-base group">
-                Talk to Us <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
+            <div className="flex flex-wrap justify-center gap-4">
+              <a
+                href={getWhatsAppLink("Hello Zeyus Technologies! I would like to get a custom quote for my project.")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-8 py-3.5 rounded-xl hover:bg-[#20bd5a] transition-all shadow-lg hover:shadow-xl text-base"
+              >
+                <MessageCircle className="w-5 h-5 fill-current" />
+                WhatsApp Us Now
+              </a>
+              <Link to="/contact">
+                <Button size="lg" variant="outline" className="px-8 text-base group">
+                  Send Email Form <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
+            </div>
           </div>
         </motion.div>
       </Container>

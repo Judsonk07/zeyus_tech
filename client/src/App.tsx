@@ -4,6 +4,7 @@ import { AnimatePresence } from 'framer-motion';
 
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
+import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 
 import { Home } from './pages/Home';
 import { Services } from './pages/Services';
@@ -35,6 +36,7 @@ export default function App() {
           </AnimatePresence>
         </main>
         <Footer />
+        <WhatsAppButton />
       </div>
     </BrowserRouter>
   );

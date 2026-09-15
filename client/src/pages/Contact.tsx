@@ -22,7 +22,7 @@ import { GlassCard } from '@/components/ui/GlassCard';
 import { Button } from '@/components/ui/Button';
 import { Accordion } from '@/components/ui/Accordion';
 import { api } from '@/lib/api';
-import { COMPANY } from '@/lib/constants';
+import { COMPANY, getWhatsAppLink } from '@/lib/constants';
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -383,6 +383,27 @@ export const Contact: React.FC = () => {
                       className="text-slate-600 hover:text-blue transition-colors font-medium hover:underline text-sm sm:text-base"
                     >
                       {COMPANY.phone}
+                    </a>
+                  </div>
+                </motion.div>
+
+                {/* WhatsApp Instant Chat Item */}
+                <motion.div 
+                  whileHover={{ x: 4 }}
+                  className="flex items-start p-3 rounded-xl bg-[#25D366]/10 hover:bg-[#25D366]/20 transition-all border border-[#25D366]/30"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-[#25D366] flex items-center justify-center text-white mr-4 flex-shrink-0 shadow-sm">
+                    <MessageSquare className="w-5 h-5 fill-current" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-navy text-sm">WhatsApp Instant Chat</h4>
+                    <a 
+                      href={getWhatsAppLink()}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#128C7E] hover:text-[#075E54] font-bold transition-colors underline text-sm sm:text-base flex items-center gap-1.5 mt-0.5"
+                    >
+                      Chat on WhatsApp for Instant Quote →
                     </a>
                   </div>
                 </motion.div>
