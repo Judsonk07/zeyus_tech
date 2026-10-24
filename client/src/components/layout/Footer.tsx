@@ -35,7 +35,7 @@ export const Footer: React.FC = () => {
           <div className="space-y-6">
             <Link to="/" className="inline-block group">
               <img 
-                src="/assets/zeyus-logo-3d.png" 
+                src="/assets/zeyus-logo-v3.png" 
                 alt="Zeyus Technology" 
                 className="h-10 sm:h-11 w-auto object-contain group-hover:scale-105 transition-transform duration-300" 
               />
