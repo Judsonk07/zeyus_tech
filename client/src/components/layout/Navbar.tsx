@@ -54,9 +54,9 @@ export const Navbar: React.FC = () => {
             {/* Sleek Brand Logo */}
             <NavLink to="/" className="flex items-center z-50 group">
               <img 
-                src="/assets/zeyus-logo.png" 
+                src="/assets/zeyus-logo-3d.png" 
                 alt="Zeyus Technology" 
-                className="h-8 sm:h-10 w-auto object-contain group-hover:scale-105 transition-transform duration-300" 
+                className="h-8 sm:h-10 md:h-11 w-auto object-contain group-hover:scale-105 transition-transform duration-300" 
               />
             </NavLink>
 
@@ -144,7 +144,7 @@ export const Navbar: React.FC = () => {
                 {/* Header in Drawer */}
                 <div className="flex items-center justify-between pb-6 mb-6 border-b border-slate-100">
                   <img 
-                    src="/assets/zeyus-logo.png" 
+                    src="/assets/zeyus-logo-3d.png" 
                     alt="Zeyus Technology" 
                     className="h-8 w-auto object-contain" 
                   />
