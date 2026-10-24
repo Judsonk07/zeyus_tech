@@ -52,13 +52,12 @@ export const Navbar: React.FC = () => {
         <Container>
           <div className="flex items-center justify-between">
             {/* Sleek Brand Logo */}
-            <NavLink to="/" className="flex items-center gap-2 sm:gap-3 z-50 group">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl overflow-hidden shadow-md group-hover:scale-105 transition-transform duration-300 border border-slate-200 bg-white">
-                <img src="/favicon.jpg" alt="Zeyus Technologies Logo" className="w-full h-full object-cover" />
-              </div>
-              <span className="font-heading font-bold text-lg sm:text-2xl tracking-tight text-navy">
-                ZEYUS <span className="bg-gradient-to-r from-sky to-blue bg-clip-text text-transparent hidden sm:inline">TECH</span><span className="bg-gradient-to-r from-sky to-blue bg-clip-text text-transparent sm:hidden">TECH</span>
-              </span>
+            <NavLink to="/" className="flex items-center z-50 group">
+              <img 
+                src="/assets/zeyus-logo.png" 
+                alt="Zeyus Technology" 
+                className="h-8 sm:h-10 w-auto object-contain group-hover:scale-105 transition-transform duration-300" 
+              />
             </NavLink>
 
             {/* Desktop Nav Floating Pills */}
@@ -144,7 +143,11 @@ export const Navbar: React.FC = () => {
               <div>
                 {/* Header in Drawer */}
                 <div className="flex items-center justify-between pb-6 mb-6 border-b border-slate-100">
-                  <span className="font-heading font-bold text-lg text-navy">Menu</span>
+                  <img 
+                    src="/assets/zeyus-logo.png" 
+                    alt="Zeyus Technology" 
+                    className="h-8 w-auto object-contain" 
+                  />
                   <button 
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="p-2 rounded-xl text-slate-500 hover:text-navy hover:bg-surface transition-colors"

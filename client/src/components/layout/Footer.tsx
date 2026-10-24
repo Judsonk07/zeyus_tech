@@ -33,10 +33,12 @@ export const Footer: React.FC = () => {
           
           {/* Column 1: Brand & Tagline */}
           <div className="space-y-6">
-            <Link to="/" className="inline-block">
-              <span className="font-heading font-bold text-2xl tracking-widest text-navy-900">
-                ZEYUS <span className="text-sky-500">TECH</span>
-              </span>
+            <Link to="/" className="inline-block group">
+              <img 
+                src="/assets/zeyus-logo.png" 
+                alt="Zeyus Technology" 
+                className="h-10 sm:h-11 w-auto object-contain group-hover:scale-105 transition-transform duration-300" 
+              />
             </Link>
             <p className="text-gray-600 leading-relaxed">
               Empowering businesses through innovative digital solutions and cutting-edge technology.
