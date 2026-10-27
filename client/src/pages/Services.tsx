@@ -13,8 +13,7 @@ import {
   Zap,
   Clock,
   ShieldCheck,
-  MessageCircle,
-  Tag
+  MessageCircle
 } from 'lucide-react';
 
 import { Container } from '@/components/layout/Container';
@@ -34,7 +33,6 @@ interface ServiceSectionProps {
   title: string;
   description: string;
   features: string[];
-  startingPrice?: string;
   whatsappMsg?: string;
   icon: any;
   reversed?: boolean;
@@ -46,13 +44,12 @@ const ServiceSection: React.FC<ServiceSectionProps> = ({
   title, 
   description, 
   features, 
-  startingPrice,
   whatsappMsg,
   icon: Icon, 
   reversed = false,
   isPurple = false
 }) => {
-  const whatsappUrl = getWhatsAppLink(whatsappMsg || `Hello Zeyus Technologies! I am interested in your ${title} services. Please share pricing and project details.`);
+  const whatsappUrl = getWhatsAppLink(whatsappMsg || `Hello Zeyus Technologies! I am interested in your ${title} services (Standard / Premium / Custom). Please share details.`);
 
   return (
     <motion.div 
@@ -99,11 +96,9 @@ const ServiceSection: React.FC<ServiceSectionProps> = ({
             ${isPurple ? 'bg-purple/10 text-purple' : 'bg-blue/10 text-blue'}`}>
             Service Breakdown
           </span>
-          {startingPrice && (
-            <span className="px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-800 border border-green-300 flex items-center gap-1">
-              <Tag className="w-3 h-3" /> Starts at {startingPrice}
-            </span>
-          )}
+          <span className="px-3 py-1 rounded-full text-xs font-semibold bg-sky/10 text-sky border border-sky/20 flex items-center gap-1">
+            <Sparkles className="w-3 h-3 text-sky" /> Standard · Premium · Custom
+          </span>
         </div>
         <h3 className="text-3xl sm:text-4xl font-heading font-bold text-navy mb-4">{title}</h3>
         <p className="text-base sm:text-lg text-slate-600 mb-6 leading-relaxed">{description}</p>
@@ -146,7 +141,7 @@ const ServiceSection: React.FC<ServiceSectionProps> = ({
             href="#pricing-packages"
             className="inline-flex items-center gap-1.5 text-blue font-semibold hover:text-navy text-sm sm:text-base transition-colors"
           >
-            View Pricing Plans ↓
+            View Packages ↓
           </a>
         </div>
       </div>
@@ -208,7 +203,7 @@ export const Services: React.FC = () => {
             >
               What We Do Best. <br />
               <span className="bg-gradient-to-r from-sky via-blue to-purple bg-clip-text text-transparent">
-                Transparent Pricing & Instant Support.
+                Tailored Services & Instant Quotes.
               </span>
             </motion.h1>
 
@@ -219,7 +214,7 @@ export const Services: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-base sm:text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-10"
             >
-              Check our service plans, explore starting prices, and chat directly with our technical team on WhatsApp with a single click.
+              Explore our Standard, Premium, and Custom service packages, and connect directly with our technical team on WhatsApp for a fast, custom quote.
             </motion.p>
 
             {/* Metric Pills */}
@@ -255,7 +250,7 @@ export const Services: React.FC = () => {
                 </div>
                 <div className="text-left">
                   <p className="font-heading font-bold text-navy text-sm">Instant WhatsApp Quotes</p>
-                  <p className="text-xs text-slate-500">Pre-filled default messages</p>
+                  <p className="text-xs text-slate-500">Standard, Premium & Custom</p>
                 </div>
               </div>
             </motion.div>
@@ -269,8 +264,7 @@ export const Services: React.FC = () => {
           <ServiceSection 
             id="web"
             title="Web Development"
-            startingPrice="₹9,999"
-            whatsappMsg="Hello Zeyus Technologies! I am interested in your Web Development pricing (Starting at ₹9,999). Can we discuss my website project?"
+            whatsappMsg="Hello Zeyus Technologies! I am interested in Web Development services (Standard, Premium, or Custom). Can we discuss my project?"
             description="We build fast, responsive, and secure custom websites, web applications, and SaaS platforms that provide exceptional user experiences."
             icon={Code2}
             features={[
@@ -285,8 +279,7 @@ export const Services: React.FC = () => {
           <ServiceSection 
             id="cloud"
             title="Cloud & DevOps"
-            startingPrice="₹14,999"
-            whatsappMsg="Hello Zeyus Technologies! I am interested in your Cloud & DevOps pricing (Starting at ₹14,999). Can we discuss cloud architecture for my app?"
+            whatsappMsg="Hello Zeyus Technologies! I am interested in Cloud & DevOps services (Standard, Premium, or Custom). Can we discuss cloud architecture for my app?"
             description="Streamline your development lifecycle and scale effortlessly with our robust cloud architecture and DevOps solutions."
             icon={CloudCog}
             reversed={true}
@@ -302,8 +295,7 @@ export const Services: React.FC = () => {
           <ServiceSection 
             id="marketing"
             title="Ads & Digital Marketing"
-            startingPrice="₹7,999 / mo"
-            whatsappMsg="Hello Zeyus Technologies! I am interested in your Digital Marketing & Ads packages (Starting at ₹7,999/mo). How can you help grow my leads?"
+            whatsappMsg="Hello Zeyus Technologies! I am interested in Digital Marketing & Ads packages (Standard, Premium, or Custom). How can you help grow my leads?"
             description="Drive targeted traffic and increase conversions with data-driven marketing strategies tailored to your target audience."
             icon={LineChart}
             features={[
@@ -318,8 +310,7 @@ export const Services: React.FC = () => {
           <ServiceSection 
             id="video"
             title="Video Editing"
-            startingPrice="₹4,999"
-            whatsappMsg="Hello Zeyus Technologies! I am interested in your Video Editing pricing (Starting at ₹4,999). Can I share my video requirements?"
+            whatsappMsg="Hello Zeyus Technologies! I am interested in Video Editing services (Standard, Premium, or Custom). Can I share my video requirements?"
             description="Captivate your audience with high-quality video content that tells your brand's story across all platforms."
             icon={Film}
             reversed={true}
@@ -335,8 +326,7 @@ export const Services: React.FC = () => {
           <ServiceSection 
             id="education"
             title="AI, Cloud & DevOps Education"
-            startingPrice="₹2,999"
-            whatsappMsg="Hello Zeyus Technologies! I am interested in enrolling in your AI, Cloud & DevOps Education programs (Starting at ₹2,999). Please send details."
+            whatsappMsg="Hello Zeyus Technologies! I am interested in your AI, Cloud & DevOps Education programs (Standard, Premium, or Custom). Please send details."
             description="Upskill yourself or your team with our industry-aligned training programs, led by practicing experts."
             icon={Lightbulb}
             isPurple={true}
@@ -350,10 +340,10 @@ export const Services: React.FC = () => {
           />
         </div>
 
-        {/* Dedicated Service Pricing Packages Section */}
+        {/* Dedicated Service Packages Section */}
         <div id="pricing-packages" className="py-20 border-t border-sky/10">
-          <SectionHeading subtitle="Transparent pricing plans. Click any plan to contact us directly on WhatsApp with a pre-filled inquiry message.">
-            Service Pricing & Packages
+          <SectionHeading subtitle="Choose between our Standard, Premium, and Custom service packages. Click any plan to chat directly on WhatsApp for an instant quote.">
+            Service Packages & Tiers
           </SectionHeading>
 
           {/* Category Tabs Selector */}
@@ -394,12 +384,22 @@ export const Services: React.FC = () => {
                       </div>
                     )}
 
-                    <h4 className="text-2xl font-heading font-bold text-navy mb-2">{plan.name}</h4>
-                    
-                    <div className="my-4 flex items-baseline gap-1">
-                      <span className="text-4xl font-heading font-extrabold text-blue">{plan.price}</span>
-                      {plan.period && <span className="text-sm font-semibold text-slate-500">{plan.period}</span>}
+                    <div className="flex items-center justify-between gap-2 mb-2 mt-1">
+                      <h4 className="text-2xl sm:text-3xl font-heading font-extrabold text-navy">{plan.name}</h4>
+                      {plan.badge && (
+                        <span className={`text-[10px] font-extrabold tracking-wider px-2.5 py-1 rounded-full uppercase ${
+                          plan.popular 
+                            ? 'bg-blue text-white shadow-sm' 
+                            : 'bg-sky/10 text-sky border border-sky/20'
+                        }`}>
+                          {plan.badge}
+                        </span>
+                      )}
                     </div>
+
+                    <p className="text-xs font-bold text-blue uppercase tracking-wider mb-4">
+                      {plan.tagline}
+                    </p>
 
                     <p className="text-slate-600 text-sm leading-relaxed mb-6">{plan.description}</p>
                     
@@ -422,7 +422,7 @@ export const Services: React.FC = () => {
                       className="w-full inline-flex items-center justify-center gap-2 bg-[#25D366] text-white font-bold py-3.5 px-6 rounded-xl hover:bg-[#20bd5a] transition-all shadow-md hover:shadow-lg text-sm sm:text-base mb-3 group"
                     >
                       <MessageCircle className="w-5 h-5 fill-current" />
-                      Enquire on WhatsApp
+                      Get Quote on WhatsApp
                     </a>
 
                     <Link

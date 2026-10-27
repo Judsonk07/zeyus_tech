@@ -123,9 +123,9 @@ export const getWhatsAppLink = (message?: string) => {
 };
 
 export interface PricingPlan {
-  name: string;
-  price: string;
-  period?: string;
+  name: 'Standard' | 'Premium' | 'Custom';
+  tagline: string;
+  badge?: string;
   description: string;
   features: string[];
   popular?: boolean;
@@ -135,7 +135,6 @@ export interface PricingPlan {
 export interface ServicePricingCategory {
   serviceId: string;
   serviceName: string;
-  startingPrice: string;
   plans: PricingPlan[];
 }
 
@@ -143,213 +142,248 @@ export const PRICING_DATA: ServicePricingCategory[] = [
   {
     serviceId: 'web-development',
     serviceName: 'Web Development',
-    startingPrice: '₹9,999',
     plans: [
       {
-        name: 'Starter Website',
-        price: '₹9,999',
-        description: 'Single-page landing site or business portfolio with responsive UI and contact form.',
+        name: 'Standard',
+        tagline: 'Essential Web Presence',
+        badge: 'STANDARD',
+        description: 'High-speed modern responsive website or portfolio designed to establish your brand online.',
         features: [
-          'High-performance React / Tailwind UI',
-          'Mobile & Tablet Responsive',
-          'Contact Form & Email Notifications',
-          'Basic SEO & Fast Page Speed',
-          'Delivery in 5-7 Days'
+          'Modern React & Tailwind CSS UI',
+          'Fully Responsive (Mobile, Tablet & Desktop)',
+          'Fast Page Speed & Core Web Vitals',
+          'Contact Form with Email Notifications',
+          'Basic On-Page SEO & Social Meta Tags',
+          'Domain & SSL Deployment Setup'
         ],
-        whatsappMessage: "Hello Zeyus Technologies! I'm interested in the Starter Website package (₹9,999). Can we discuss my requirements?"
+        whatsappMessage: "Hello Zeyus Technologies! I'm interested in the Standard Web Development package. Please share details and a quote."
       },
       {
-        name: 'Pro Web Application',
-        price: '₹24,999',
+        name: 'Premium',
+        tagline: 'Dynamic Full-Stack Web App',
         popular: true,
-        description: 'Multi-page dynamic web app or MERN stack platform with backend integration.',
+        badge: 'MOST POPULAR',
+        description: 'Full-stack web application or dynamic portal with custom backend, database, and auth.',
         features: [
-          'Full-Stack MERN / Next.js Architecture',
-          'Database Integration (MongoDB / PostgreSQL)',
-          'User Auth & Admin Dashboard',
-          'Payment Gateway & API Integrations',
-          '3 Months Support & Maintenance'
+          'Full-Stack MERN or Next.js Architecture',
+          'Database Setup (MongoDB / PostgreSQL)',
+          'User Authentication & Admin Dashboard',
+          'Payment Gateway & 3rd-Party API Integrations',
+          'Performance Optimization & Security Hardening',
+          '3 Months Priority Support & Maintenance'
         ],
-        whatsappMessage: "Hello Zeyus Technologies! I'm interested in the Pro Web Application package (₹24,999). I'd like to get a quote for my project."
+        whatsappMessage: "Hello Zeyus Technologies! I'm interested in the Premium Web Development package. I'd like to get a quote for my project."
       },
       {
-        name: 'Enterprise SaaS',
-        price: 'Custom',
-        description: 'Tailored enterprise software, custom SaaS products, and e-commerce platforms.',
+        name: 'Custom',
+        tagline: 'Enterprise SaaS & Bespoke Platform',
+        badge: 'TAILORED',
+        description: 'Tailored enterprise software, custom SaaS platforms, and large-scale digital products.',
         features: [
-          'Custom Microservices & Cloud Hosting',
-          'Advanced Security & Automated Backup',
-          'Dedicated Development Lead',
-          'Scalable Infrastructure Setup',
-          'Priority 24/7 SLA Support'
+          'Bespoke System Architecture & Microservices',
+          'High-Traffic Cloud Infrastructure & Auto-Scaling',
+          'Custom Third-Party & ERP/CRM Integrations',
+          'Advanced Role-Based Access & Security Audits',
+          'Dedicated Senior Developer & Project Lead',
+          '24/7 Priority SLA & Ongoing Maintenance'
         ],
-        whatsappMessage: "Hello Zeyus Technologies! I'm interested in a Custom Enterprise SaaS solution. Can we schedule a call?"
+        whatsappMessage: "Hello Zeyus Technologies! I'm interested in a Custom Web Development solution. Can we schedule a consultation call?"
       }
     ]
   },
   {
     serviceId: 'cloud-devops',
     serviceName: 'Cloud & DevOps',
-    startingPrice: '₹14,999',
     plans: [
       {
-        name: 'Cloud Setup & Hardening',
-        price: '₹14,999',
-        description: 'Initial cloud architecture setup on AWS, GCP, or Azure with domain and SSL.',
+        name: 'Standard',
+        tagline: 'Cloud Setup & Server Config',
+        badge: 'STANDARD',
+        description: 'Solid cloud infrastructure setup, domain configuration, and security fundamentals.',
         features: [
-          'AWS EC2 / S3 / RDS Configuration',
-          'SSL Certificate & Security Hardening',
-          'Domain & Nginx / Reverse Proxy Setup',
-          'Automated Database Backups',
-          'Initial Performance Tuning'
+          'AWS, GCP, or Azure Cloud Setup',
+          'SSL Certificate & Domain/DNS Setup',
+          'Nginx Reverse Proxy & Firewall Configuration',
+          'Automated Scheduled Database Backups',
+          'Initial Server Optimization & Hardening'
         ],
-        whatsappMessage: "Hello Zeyus Technologies! I'm interested in Cloud Setup & Security Hardening (₹14,999). Please share more details."
+        whatsappMessage: "Hello Zeyus Technologies! I'm interested in the Standard Cloud & DevOps package. Please share details and a quote."
       },
       {
-        name: 'DevOps & CI/CD Pipeline',
-        price: '₹29,999',
+        name: 'Premium',
+        tagline: 'Automated CI/CD & Containers',
         popular: true,
-        description: 'End-to-end containerization, automated build & deployment pipelines.',
+        badge: 'MOST POPULAR',
+        description: 'Production containerization, zero-downtime deployment pipelines, and active monitoring.',
         features: [
-          'Docker & Docker Compose Config',
-          'GitHub Actions / GitLab CI/CD Pipeline',
-          'Zero-Downtime Deployment Setup',
-          'Infrastructure as Code (Terraform)',
-          'Monitoring & Alerting Setup'
+          'Docker Containerization & Multi-Stage Builds',
+          'Automated CI/CD Pipelines (GitHub Actions / GitLab)',
+          'Zero-Downtime Blue/Green or Rolling Deployments',
+          'Infrastructure as Code (Terraform / Ansible)',
+          'Live System Monitoring & Real-time Alerts'
         ],
-        whatsappMessage: "Hello Zeyus Technologies! I'm interested in DevOps & CI/CD Pipeline Automation (₹29,999). Can we discuss my stack?"
+        whatsappMessage: "Hello Zeyus Technologies! I'm interested in the Premium Cloud & DevOps package. Let's discuss my infrastructure requirements."
       },
       {
-        name: 'Managed Cloud Retainer',
-        price: '₹19,999',
-        period: '/ month',
-        description: 'Ongoing cloud management, uptime monitoring, and infrastructure maintenance.',
+        name: 'Custom',
+        tagline: 'Enterprise Multi-Cloud & Retainer',
+        badge: 'TAILORED',
+        description: 'High-availability Kubernetes clusters, cloud cost reduction, and ongoing DevOps retainer.',
         features: [
-          '24/7 Server Uptime Monitoring',
-          'Monthly Security Updates & Patches',
-          'Cost Optimization & Right-Sizing',
-          'Infrastructure Scaling on Demand',
-          'Dedicated DevOps Engineer'
+          'Production Kubernetes (EKS / GKE / AKS) Clusters',
+          'Multi-Cloud & Hybrid Cloud Architecture',
+          'Cloud Cost Optimization & Resource Right-Sizing',
+          'Disaster Recovery & Enterprise SLA',
+          'Dedicated DevOps Lead & Monthly Retainer'
         ],
-        whatsappMessage: "Hello Zeyus Technologies! I'm interested in your Managed Cloud Retainer (₹19,999/mo). Let's talk about managing our servers."
+        whatsappMessage: "Hello Zeyus Technologies! I'm interested in a Custom Cloud & DevOps infrastructure plan. Can we discuss our technical stack?"
       }
     ]
   },
   {
     serviceId: 'digital-marketing',
     serviceName: 'Ads & Digital Marketing',
-    startingPrice: '₹7,999 / mo',
     plans: [
       {
-        name: 'Starter Ads Setup',
-        price: '₹7,999',
-        period: '/ month',
-        description: 'Targeted Google Ads or Meta Ads campaign setup for small business lead generation.',
+        name: 'Standard',
+        tagline: 'Starter Campaigns & Setup',
+        badge: 'STANDARD',
+        description: 'Targeted paid advertising setup to generate immediate leads for small and growing businesses.',
         features: [
-          'Meta (FB/IG) or Google Ads Setup',
-          'Ad Copy & High-Converting Creatives',
-          'Audience Targeting & Pixel Setup',
-          'Weekly Performance Reports',
-          'Ad Spend Optimization'
+          'Google Search Ads or Meta (FB/IG) Campaign Setup',
+          'High-Converting Ad Copy & Creative Design',
+          'Audience Targeting & Pixel/Conversion Tracking',
+          'Weekly Performance & Spend Reports',
+          'Keyword & Bid Optimization'
         ],
-        whatsappMessage: "Hello Zeyus Technologies! I'm interested in your Starter Ads Setup package (₹7,999/mo). I want to get more leads."
+        whatsappMessage: "Hello Zeyus Technologies! I'm interested in the Standard Digital Marketing package. How can you help grow my leads?"
       },
       {
-        name: 'Growth Marketing Suite',
-        price: '₹17,999',
-        period: '/ month',
+        name: 'Premium',
+        tagline: 'Omnichannel Growth & SEO',
         popular: true,
-        description: 'Omnichannel digital marketing with SEO, Meta & Google Ads, and funnel optimization.',
+        badge: 'MOST POPULAR',
+        description: 'Integrated growth strategy across Meta and Google with technical SEO and conversion funnels.',
         features: [
-          'Multi-Platform Meta + Google Ad Campaigns',
-          'Technical & On-Page SEO Optimization',
-          'Conversion Funnel & Landing Page CRO',
-          'Retargeting & Remarketing Ads',
-          'Dedicated Campaign Manager'
+          'Cross-Platform Campaigns (Google Ads + Meta Ads)',
+          'On-Page & Technical SEO Optimization',
+          'Landing Page Conversion Rate Optimization (CRO)',
+          'Retargeting & Remarketing Funnels',
+          'Dedicated Campaign Strategist & Bi-Weekly Syncs'
         ],
-        whatsappMessage: "Hello Zeyus Technologies! I'm interested in the Growth Marketing Suite (₹17,999/mo). Can you review my business strategy?"
+        whatsappMessage: "Hello Zeyus Technologies! I'm interested in the Premium Digital Marketing package. Can we discuss a marketing strategy for my business?"
+      },
+      {
+        name: 'Custom',
+        tagline: '360° Brand Scaling Suite',
+        badge: 'TAILORED',
+        description: 'Full-funnel digital growth, custom content strategy, attribution modeling, and scaling.',
+        features: [
+          'Comprehensive 360° Growth & Acquisition Strategy',
+          'Full-Funnel Lead Generation & Email Automation',
+          'Video Ads & Custom UGC Content Direction',
+          'Advanced Multi-Touch Attribution & Custom Dashboards',
+          'Dedicated Growth Team & Weekly Strategy Sessions'
+        ],
+        whatsappMessage: "Hello Zeyus Technologies! I'm interested in a Custom Digital Marketing strategy. Can we schedule a consultation?"
       }
     ]
   },
   {
     serviceId: 'video-editing',
     serviceName: 'Video Editing',
-    startingPrice: '₹4,999',
     plans: [
       {
-        name: 'Reels & Shorts Pack',
-        price: '₹4,999',
-        description: 'Pack of 5 high-retention short-form videos for Instagram, YouTube Shorts, or TikTok.',
+        name: 'Standard',
+        tagline: 'Short-Form Viral Pack',
+        badge: 'STANDARD',
+        description: 'High-retention short-form videos optimized for Instagram Reels, YouTube Shorts, and TikTok.',
         features: [
-          '5 Engaging Short Videos (Up to 60s)',
-          'Animated Subtitles & Hook Captions',
-          'Sound Design & Trend Music Sync',
-          'Color Correction & Transitions',
-          'Delivery in 48-72 Hours'
+          'Batch of Engaging Short Videos (Up to 60s each)',
+          'Dynamic Animated Captions & Bold Hooks',
+          'Sound Design & Trend Music Synchronization',
+          'Color Correction & Fast-Paced Cuts',
+          'Quick 48–72h Turnaround Delivery'
         ],
-        whatsappMessage: "Hello Zeyus Technologies! I'm interested in the Reels & Shorts Pack (₹4,999 for 5 videos). Can I see samples?"
+        whatsappMessage: "Hello Zeyus Technologies! I'm interested in the Standard Video Editing package. Can I share my video requirements?"
       },
       {
-        name: 'Corporate & Promo Edit',
-        price: '₹11,999',
+        name: 'Premium',
+        tagline: 'Commercial & Long-Form Video',
         popular: true,
-        description: 'Commercial video production, brand promo, or YouTube long-form editing.',
+        badge: 'MOST POPULAR',
+        description: 'Cinematic commercial editing, corporate promo videos, and YouTube long-form content.',
         features: [
-          'Full HD / 4K Video Editing (Up to 10 mins)',
-          'Custom Motion Graphics & Lower Thirds',
-          'Voiceover Sync & Audio Clean-up',
-          'Professional Color Grading',
-          '2 Rounds of Revisions'
+          'Full HD / 4K Video Editing (Up to 10–15 mins)',
+          'Custom Motion Graphics, Lower Thirds & Intro/Outro',
+          'Voiceover Sync, Noise Removal & Audio Mastering',
+          'Cinematic Color Grading & Visual Effects',
+          'Multiple Revision Rounds & Source File Delivery'
         ],
-        whatsappMessage: "Hello Zeyus Technologies! I'm interested in Corporate & Promo Video Editing (₹11,999). Let me share my footage."
+        whatsappMessage: "Hello Zeyus Technologies! I'm interested in the Premium Video Editing package. Let's discuss my project details."
       },
       {
-        name: 'Content Creator Retainer',
-        price: '₹19,999',
-        period: '/ month',
-        description: 'Dedicated monthly editing team for continuous content creation.',
+        name: 'Custom',
+        tagline: 'Creator & Agency Retainer',
+        badge: 'TAILORED',
+        description: 'Dedicated video editing team providing continuous content production every month.',
         features: [
-          '15 Short Videos + 2 Long Videos / month',
-          'Custom Thumbnail Design Included',
-          'Fast 24-48h Turnaround Time',
-          'Content Strategy & Trend Advice',
-          'Dedicated Video Editor'
+          'Monthly Dedicated Content Production Retainer',
+          'Custom High-CTR YouTube Thumbnail Designs',
+          'Priority 24h Turnaround Time on Urgent Edits',
+          'Content Repurposing (Long-form to Multiple Shorts)',
+          'Dedicated Senior Editor & Direct Slack/WhatsApp Channel'
         ],
-        whatsappMessage: "Hello Zeyus Technologies! I'm interested in your Content Creator Video Editing Retainer (₹19,999/mo). Let's collaborate!"
+        whatsappMessage: "Hello Zeyus Technologies! I'm interested in a Custom Video Editing retainer. Let's talk about ongoing collaboration."
       }
     ]
   },
   {
     serviceId: 'ai-education',
     serviceName: 'AI & Tech Education',
-    startingPrice: '₹2,999',
     plans: [
       {
-        name: 'Self-Paced Learning',
-        price: '₹2,999',
-        description: 'Access to structured course modules in Cloud, DevOps, and AI engineering fundamentals.',
+        name: 'Standard',
+        tagline: 'Self-Paced Learning Track',
+        badge: 'STANDARD',
+        description: 'Comprehensive video modules in Cloud, DevOps, and AI engineering with guided labs.',
         features: [
-          'Full HD Video Lecture Access',
-          'Hands-On Lab Guides & Code Repos',
-          'Practical Assignment Feedback',
-          'Course Completion Certificate',
-          'Lifetime Discord Community Access'
+          'Structured HD Video Lecture Access',
+          'Hands-On Lab Guides & GitHub Repositories',
+          'Practical Assignment Feedback & Exercises',
+          'Verified Course Completion Certificate',
+          'Access to Tech Community Discord / Group'
         ],
-        whatsappMessage: "Hello Zeyus Technologies! I'm interested in the Self-Paced AI/Cloud Education Course (₹2,999). How do I enroll?"
+        whatsappMessage: "Hello Zeyus Technologies! I'm interested in the Standard Tech Education program. Please share enrollment details."
       },
       {
-        name: 'Live Mentorship Cohort',
-        price: '₹6,999',
+        name: 'Premium',
+        tagline: 'Live Mentorship Cohort',
         popular: true,
-        description: 'Interactive live classes, real-world portfolio projects, and 1-on-1 mentorship.',
+        badge: 'MOST POPULAR',
+        description: 'Live interactive cohort classes with 1-on-1 industry mentorship and career assistance.',
         features: [
-          '8 Weeks Live Interactive Sessions',
-          '1-on-1 Weekly Technical Mentorship',
-          'Building Live Cloud & AI Portfolio Projects',
-          'Resume Review & Mock Interviews',
-          'Job Placement Assistance'
+          'Live Interactive Cohort Classes with Practicing Engineers',
+          '1-on-1 Weekly Technical Mentorship & Guidance',
+          'Real-World Production Cloud & AI Capstone Projects',
+          'Resume Review, Portfolio Building & Mock Interviews',
+          'Direct Internship & Job Placement Assistance'
         ],
-        whatsappMessage: "Hello Zeyus Technologies! I'm interested in joining the Live Mentorship Cohort (₹6,999). Please share upcoming batch dates!"
+        whatsappMessage: "Hello Zeyus Technologies! I'm interested in the Premium Live Mentorship program. Please share upcoming batch dates."
+      },
+      {
+        name: 'Custom',
+        tagline: 'Corporate & College Workshops',
+        badge: 'TAILORED',
+        description: 'Tailored technical training programs for engineering teams, companies, and colleges.',
+        features: [
+          'Tailored Syllabus Customized to Your Team\'s Tech Stack',
+          'On-Site or Remote Hands-On Cloud & AI Bootcamps',
+          'Enterprise Case Studies & Live Architecture Workshops',
+          'Employee Skill Assessment & Milestone Reporting',
+          'Dedicated Industry Instructor & Flexible Scheduling'
+        ],
+        whatsappMessage: "Hello Zeyus Technologies! I'm interested in a Custom Corporate/College Training program. Can we discuss our requirements?"
       }
     ]
   }
